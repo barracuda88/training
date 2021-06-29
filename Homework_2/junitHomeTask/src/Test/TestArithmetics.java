@@ -41,6 +41,10 @@ public class TestArithmetics {
         double result = arithmetics.div(10, 5);
         Assert.assertEquals(2.0, result,delta);
     }
+    @Test(expected = ArithmeticException.class)
+    public void zeroException() {
+        arithmetics.divide(1,0);
+    }
 
 
 }
