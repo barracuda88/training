@@ -4,40 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
-    public int from;
-    public int to;
-    private final int bottonLine=0;
-    private final int upperLine=100;
+
+    private int bottonLine;
+    private int upperLine;
     private int randomNumber;
+    private ArrayList<Integer> allNumber= new ArrayList<>();
 
-    public List<Integer> allNumbers ;
-    public Model() {
-        randomNumber=(int)(bottonLine +Math.random()* upperLine);
-        from=bottonLine;
-        to=upperLine;
-        allNumbers=new ArrayList<>();
+    public void setLine(int min,int max){
+        bottonLine=min;
+        upperLine=max;
+    }
+    public void setRandomNumber(){
+        randomNumber=(int)((bottonLine+1) + Math.random()*(upperLine-1));
+
     }
 
-
-    public boolean checkUserNumber(int userNumber) throws NumberGoingOfBoundsException{
-        numberCheck(userNumber);
-        allNumbers.add(userNumber);
-        if (randomNumber > userNumber) {
-            from = userNumber;
-        } else if (randomNumber< userNumber) {
-            to = userNumber;
+    public boolean checkNumber (int value){
+        allNumber.add(value);
+        if (value == randomNumber){
+            return false;
+        } else if (value > randomNumber){
+            upperLine= value;
         } else {
-            return true;
+            bottonLine = value;
         }
-        return false;
+        return true;
     }
-
-    public void numberCheck(int userNumber) throws NumberGoingOfBoundsException {
-        if (userNumber < from || userNumber > to) {
-            throw new NumberGoingOfBoundsException();
-        }
+    public List<Integer> getAllNumber(){
+        return allNumber;
     }
-
+    public int getBottonLine(){
+        return bottonLine;
+    }
+    public int getUpperLine(){
+        return upperLine;
+    }
+    public int getRandomNummber(){
+        return randomNumber;
+    }
 
 
 }
