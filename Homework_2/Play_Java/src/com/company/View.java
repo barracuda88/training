@@ -3,25 +3,26 @@ package com.company;
 import java.util.List;
 
 public class View {
-    public final String TYPE_ERROR = "На ввод принимается только число!";
-    public final String RANGE_ERROR = "Число не входит в диапазон  (%d, %d).";
-    public final String RANGE_MESSAGE = "Введите число из диапазона: (%d, %d).";
-    public final String LAST_MESSAGE = "Вы выиграли!!!";
-    public final String LIST_MESSAGE = "Вы уже ввели: ";
-    public void show(String message) {
+    public static final String EQUAL_SING = "=";
+    public static final String SPACE_SING = " ";
+    public static final String OPENS_SQUARE_BRACKET = "{";
+    public static final String CLOSING_SQUARE_BRACKET = "}";
+
+    public static final String INPUT_INT_DATA = "Input INT value ";
+    public static final String WRONG_INPUT_INT_DATA = "Wrong input! Repeat please! ";
+    public static final String CONGRATULATION = "You WIN!  ";
+    public static final String YOUR_WAY = "YOUR TRY = ";
+
+
+    public void printMessage (String message){
         System.out.println(message);
     }
 
-    public void show(String message, int from, int to) {
-        String msgToPrint = String.format(message, from, to);
-        System.out.println(msgToPrint+" ");
-    }
-
-    public void show(String message, List<Integer> list) {
-        System.out.print(message);
-        for (Integer i:list) {
-            System.out.print(i+" ");
+    public String concatenationString (String... message){
+        StringBuilder concatString = new StringBuilder();
+        for (String v : message){
+            concatString = concatString.append(v);
         }
-        System.out.println();
+        return new String(concatString);
     }
 }
