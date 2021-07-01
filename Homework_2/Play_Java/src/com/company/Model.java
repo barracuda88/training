@@ -13,7 +13,9 @@ public class Model {
         uperBound=max;
     }
     public void setRandomNumber(){
-        randomNumber=(int)((bottomBound+1) + Math.random()*(uperBound-1));
+       // randomNumber=(int)((bottomBound+1) + Math.random()*(uperBound-1));
+        randomNumber=(int)Math.ceil(Math.random()*
+                (uperBound - bottomBound - 1) + bottomBound);
     }
     public boolean numberComparison(int number){
         addTry(number);
