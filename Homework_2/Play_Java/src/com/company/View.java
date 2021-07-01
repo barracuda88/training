@@ -2,27 +2,26 @@ package com.company;
 
 import java.util.List;
 
-public class View {
-    public static final String EQUAL_SING = "=";
-    public static final String SPACE_SING = " ";
-    public static final String OPENS_SQUARE_BRACKET = "{";
-    public static final String CLOSING_SQUARE_BRACKET = "}";
+public class View {//Entered number is out of range: (%d, %d).
+    public final String START_LINE = "Введите число в промежутке: {%d, %d} :";
+    public final String ERROR_INPUT_LINE = "Некоретный ввод!!! ";
+    public final String ERROR_Going_Out_Of_Bounds = "Выход за дозволеные граници!!! ";
+    public final String TRYING = "Ваши попытки: ";
+    public final String WIN = "Поздравляем!!! Вы выиграли !!!";
 
-    public static final String INPUT_INT_DATA = "Input INT value ";
-    public static final String WRONG_INPUT_INT_DATA = "Wrong input! Repeat please! ";
-    public static final String CONGRATULATION = "You WIN!  ";
-    public static final String YOUR_WAY = "YOUR TRY = ";
-
-
-    public void printMessage (String message){
-        System.out.println(message);
+    public void view(String str ,int min,int max) {
+        String msgToPrint = String.format(str, min, max);
+        System.out.println(msgToPrint);
     }
-
-    public String concatenationString (String... message){
-        StringBuilder concatString = new StringBuilder();
-        for (String v : message){
-            concatString = concatString.append(v);
+    public void viewError(String error,String str,int min,int max){
+        System.out.print(error);
+        view(str, min, max);
+    }
+    public void viewWin(List<Integer> list){
+        System.out.println(WIN);
+        System.out.print(TRYING);
+        for (Integer i:list){
+            System.out.print(i+" ");
         }
-        return new String(concatString);
     }
 }
