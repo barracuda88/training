@@ -9,8 +9,8 @@ public class Model {
     private int uperBound;
     private ArrayList<Integer> allTry= new ArrayList<>();
     public void setBound(int min,int max){
-        bottomBound=0;
-        uperBound=100;
+        bottomBound=min;
+        uperBound=max;
     }
     public void setRandomNumber(){
         randomNumber=(int)((bottomBound+1) + Math.random()*(uperBound-1));
