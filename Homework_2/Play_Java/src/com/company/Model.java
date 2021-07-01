@@ -4,45 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
-
-    private int bottonLine;
-    private int upperLine;
+    private int bottomBound;
     private int randomNumber;
-    private ArrayList<Integer> allNumber= new ArrayList<>();
-
-    public void setLine(int min,int max){
-        bottonLine=min;
-        upperLine=max;
+    private int uperBound;
+    private ArrayList<Integer> allTry= new ArrayList<>();
+    public void setBound(int min,int max){
+        bottomBound=0;
+        uperBound=100;
     }
     public void setRandomNumber(){
-        randomNumber=(int)((bottonLine+1) + Math.random()*(upperLine-1));
-
+        randomNumber=(int)((bottomBound+1) + Math.random()*(uperBound-1));
     }
-
-    public boolean checkNumber (int value){
-        allNumber.add(value);
-        if (value == randomNumber){
+    public boolean numberComparison(int number){
+        addTry(number);
+        if(number==randomNumber){
             return false;
-        } else if (value > randomNumber){
-            upperLine= value;
-        } else {
-            bottonLine = value;
         }
+        else if(number>randomNumber){
+            uperBound=number;
+        }else {
+            bottomBound = number;
+        }
+
         return true;
+
     }
-    public List<Integer> getAllNumber(){
-        return allNumber;
-    }
-    public int getBottonLine(){
-        return bottonLine;
-    }
-    public int getUpperLine(){
-        return upperLine;
-    }
-    public int getRandomNummber(){
+    public int getRandomNumber(){
         return randomNumber;
     }
-
+    public int getBottomBound(){
+        return bottomBound;
+    }
+    public int getUperBound(){
+        return uperBound;
+    }
+    public List<Integer> getAllTry(){
+        return allTry;
+    }
+    public void addTry(int number){
+        allTry.add(number);
+    }
 
 }
 
