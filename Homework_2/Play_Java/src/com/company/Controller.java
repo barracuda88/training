@@ -3,56 +3,40 @@ package com.company;
 import java.util.Scanner;
 
 public class Controller {
-    private View view;
     private Model model;
-
-
-    public Controller(View view, Model model) {
-        this.view = view;
-        this.model = model;
-
+    private View view;
+    public Controller(Model model,View view){
+        this.model=model;
+        this.view=view;
     }
-
-    public void start() {
+    public void startGame(){
         Scanner scanner = new Scanner(System.in);
-        model.setLine(GlobalConstants.PRIMARY_MIN_BARRIER, GlobalConstants.PRIMARY_MAX_BARRIER);
-
-
-        while (model.checkNumber(inputIntValueWithScanner(scanner)));
-
-        view.printMessage(View.CONGRATULATION );
-        view.printMessage(View.YOUR_WAY + String.valueOf(model.getAllNumber()));
-
+        model.setBound(GlobalConstants.PRIMARY_MIN_BARRIER,GlobalConstants.PRIMARY_MAX_BARRIER);
+        model.setRandomNumber();
+        while (model.numberComparison(inputIntValueWithScanner(scanner)));
+        view.viewWin(model.getAllTry());
     }
+    private int inputIntValueWithScanner(Scanner sc){
 
-    private int inputIntValueWithScanner(Scanner sc) {
-        int res = 0;
-        view.printMessage(getInputIntMessage());
-        while (true) {
+            int res = 0;
+            view.view(view.START_LINE, model.getBottomBound(), model.getUperBound());
+            while (true) {
 
-            while (!sc.hasNextInt()) {
-                view.printMessage(View.WRONG_INPUT_INT_DATA + getInputIntMessage());
+                while (!sc.hasNextInt()) {
+                    view.viewError(view.ERROR_INPUT_LINE, view.START_LINE, model.getBottomBound(), model.getUperBound());
 
-                sc.next();
+                    sc.next();
+                }
+
+                if ((res = sc.nextInt()) <= model.getBottomBound() ||
+                        res >= model.getUperBound()) {
+                    view.viewError(view.ERROR_Going_Out_Of_Bounds, view.START_LINE, model.getBottomBound(), model.getUperBound());
+
+                    continue;
+                }
+                break;
             }
 
-            if ((res = sc.nextInt()) <= model.getBottonLine() ||
-                    res >= model.getUpperLine()) {
-                view.printMessage(View.WRONG_INPUT_INT_DATA + getInputIntMessage());
-                continue;
-            }
-            break;
+            return res;
         }
-
-        return res;
     }
-
-    private String getInputIntMessage() {
-        return view.concatenationString(
-                View.INPUT_INT_DATA, View.OPENS_SQUARE_BRACKET,
-                String.valueOf(model.getBottonLine()), View.SPACE_SING,
-                String.valueOf(model.getUpperLine()),
-                View.CLOSING_SQUARE_BRACKET, View.SPACE_SING,
-                View.EQUAL_SING, View.SPACE_SING );
-    }
-}
