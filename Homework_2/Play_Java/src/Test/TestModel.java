@@ -42,7 +42,7 @@ public class TestModel {
             Assert.fail();
         }
     }
-    @Ignore
+  // @Ignore
     @Test
     public void setRandomNumberShouldGetNinetyNine(){
         boolean checkNinetyNine=false;
@@ -57,33 +57,33 @@ public class TestModel {
         }
         Assert.assertEquals(true,checkNinetyNine);
     }
-    @Ignore
+   @Ignore
     @Test
     public void setRandomNumberShouldGetZero(){
-        boolean checkNinetyNine=false;
+        boolean checkZero=false;
         int nunber;
         for(int i=1;i<1000000000;++i){
             model.setRandomNumber();
             nunber= model.getRandomNumber();
             if(nunber==1){
 
-                checkNinetyNine=true;
+                checkZero=true;
             }
         }
-        Assert.assertEquals(true,checkNinetyNine);
+        Assert.assertEquals(true,checkZero);
     }
     @Ignore
     @Test
     public void checkOutofTheBorder(){
-        boolean checkZero=false;
+        boolean checkBorder=false;
         int number;
         for (int i=1;i<1000000;++i){
             model.setRandomNumber();
             number=model.getRandomNumber();
             if(number <= 0 | number >= 100){
-                checkZero=true;
+                checkBorder=true;
             }
         }
-        Assert.assertNotEquals(true,checkZero);
+        Assert.assertNotEquals(true,checkBorder);
     }
 }
